@@ -62,7 +62,5 @@ Follow on-screen instructions to input a scrambled cube state and see the optimi
 🔹 **DFS (Depth-First Search)** – Explores deep state branches sequentially.  
 🔹 **IDDFS (Iterative Deepening DFS)** – Merges BFS completeness with DFS memory efficiency.  
 🔹 **IDA* (Iterative Deepening A* Search)** – Uses heuristic-guided search for **faster, optimal solutions**, reducing search depth significantly.
-
 ---
-📌 **Explore the full project on GitHub:** [AlgoCubeSolver Repository](https://github.com/Tarunbhati100/AlgoCubeSolver) 🔗
 
