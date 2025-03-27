@@ -22,8 +22,9 @@ app.post('/solve', (req, res) => {
 
     // 🔁 Start timer
     const startTime = process.hrtime(); // high-resolution [seconds, nanoseconds]
-
-    execFile('./AlgoCubeSolver', args, (error, stdout, stderr) => {
+    const path = require('path');
+    const solverPath = path.join(__dirname, 'AlgoCubeSolver');
+    execFile(solverPath, args, (error, stdout, stderr) => {
         const diff = process.hrtime(startTime);
         const timeInMs = (diff[0] * 1e3 + diff[1] / 1e6).toFixed(2); // e.g. "32.45"
 
