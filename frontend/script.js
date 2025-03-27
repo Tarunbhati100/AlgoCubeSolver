@@ -52,7 +52,7 @@ document.getElementById('solveBtn').addEventListener('click', async () => {
     solveBtn.textContent = "Solving...";
 
     try {
-        const res = await fetch(' http://localhost:3000/solve', {
+        const res = await fetch('/solve', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ scramble, solver, model })
