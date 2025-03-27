@@ -78,16 +78,25 @@ document.getElementById('solveBtn').addEventListener('click', async () => {
             body: JSON.stringify({ scramble, solver, model })
         });
 
+        if (!res.ok) {
+            const text = await res.text(); // try to read error message
+            throw new Error(`Server returned ${res.status}: ${text}`);
+        }
+
         const data = await res.json();
         const { moves, timeMs } = data;
-        animateSolutionOnCube(scramble+moves.join(''));
-        // animateSolutionOnCube();
+
+        if (!moves || !Array.isArray(moves)) {
+            throw new Error("Invalid or missing moves from server");
+        }
+
+        animateSolutionOnCube(moves.join(' '));
         typeSolution(moves);
         showSummary(moves, solver, model, timeMs);
         showKnowledge(solver, model, moves.length);
     } catch (err) {
         alert("An error occurred while solving.");
-        console.error(err);
+        console.error("Solve error:", err);
     } finally {
         loader.style.display = 'none';
         solveBtn.disabled = false;
