@@ -214,3 +214,11 @@ button#resetBtn:hover {
 .footer a:hover {
     color: white;
 }
+#cubeContainer {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}

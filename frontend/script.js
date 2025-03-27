@@ -2,6 +2,26 @@ const allMoves = [
     "L", "L'", "L2", "R", "R'", "R2", "U", "U'", "U2",
     "D", "D'", "D2", "F", "F'", "F2", "B", "B'", "B2"
 ];
+const allMovesSet = new Set(allMoves);
+
+function animateSolutionOnCube(moves) {
+    const cube = document.getElementById('cubePlayer');
+    const slicecube = document.getElementById('sliceViewer');
+    if (!cube || typeof moves !== 'string') return;
+
+    const cleaned = moves.trim().replace(/\s+/g, ' ');
+
+    // Reset to a known solved state if empty
+    const alg = cleaned === '' ? "x x'" : cleaned; // ✅ dummy move pair to trigger reset
+
+    // Restart animation
+    cube.setAttribute('alg', '');
+    setTimeout(() => {
+        cube.setAttribute('alg', alg);
+        slicecube.setAttribute('alg', alg);
+    }, 50);
+}
+
 
 // Generate move buttons
 const moveButtonsContainer = document.getElementById('moveButtons');
@@ -16,14 +36,15 @@ function addMoveToInput(move) {
     const input = document.getElementById('scramble');
     const currentMoves = input.value.trim() === '' ? [] : input.value.trim().split(/\s+/);
 
-    if (currentMoves.length >= 11) {
-        alert("Max 11 moves allowed.");
+    if (currentMoves.length >= 12) {
+        alert("Max 12 moves allowed.");
         return;
     }
 
     currentMoves.push(move);
     input.value = currentMoves.join(' ');
     updateMoveCount(currentMoves.length);
+    input.dispatchEvent(new Event('input'));
 }
 
 
@@ -33,7 +54,6 @@ document.getElementById('solveBtn').addEventListener('click', async () => {
     const solver = document.getElementById('solverSelect').value;
     const model = document.getElementById('modelSelect').value;
     if (!scramble) return alert("Enter a scramble.");
-
     // 🧹 Clear previous output
     const summary = document.getElementById('solutionSummary');
     const display = document.getElementById('solutionDisplay');
@@ -60,7 +80,8 @@ document.getElementById('solveBtn').addEventListener('click', async () => {
 
         const data = await res.json();
         const { moves, timeMs } = data;
-
+        animateSolutionOnCube(scramble+moves.join(''));
+        // animateSolutionOnCube();
         typeSolution(moves);
         showSummary(moves, solver, model, timeMs);
         showKnowledge(solver, model, moves.length);
@@ -173,28 +194,46 @@ function showSummary(moves, solver, model, timeMs) {
     typeWriterHTML(summary, summaryText, 25);
 }
 
-
+let cubeTimeout = null; // ✅ persist across function calls
 
 document.getElementById('scramble').addEventListener('input', () => {
-    const moves = document.getElementById('scramble').value.trim();
+    const inputElem = document.getElementById('scramble');
+    const moves = inputElem.value.trim();
     const moveCount = moves === '' ? 0 : moves.split(/\s+/).length;
-    if (moveCount > 11) {
-        // Trim it down to max 11
-        const trimmed = moves.split(/\s+/).slice(0, 11).join(' ');
-        document.getElementById('scramble').value = trimmed;
-        updateMoveCount(11);
-    } else {
-        updateMoveCount(moveCount);
+    if (moveCount > 12) {
+        const trimmed = moves.split(/\s+/).slice(0, 12).join(' ');
+        inputElem.value = trimmed;
+        updateMoveCount(12);
+        return;
     }
+
+    updateMoveCount(moveCount);
+
+    clearTimeout(cubeTimeout);
+    cubeTimeout = setTimeout(() => {
+        const cleaned = inputElem.value.trim().replace(/\s+/g, ' ');
+        const moveList = cleaned === '' ? [] : cleaned.split(' ');
+
+// ✅ Validate
+        const isValid = moveList.length === 0 || moveList.every(move => allMovesSet.has(move));
+
+        console.log(cleaned);
+        if (!isValid) return; // Don't animate invalid input
+
+        animateSolutionOnCube(cleaned);
+    }, 300);
 });
+
+
 function updateMoveCount(count) {
     const display = document.getElementById('moveCount');
-    display.textContent = `Moves used: ${count} / 11`;
+    display.textContent = `Moves used: ${count} / 12`;
 }
 
 document.getElementById('resetBtn').addEventListener('click', () => {
     // Clear scramble
-    document.getElementById('scramble').value = '';
+    let input = document.getElementById('scramble');
+    input.value = '';
 
     // Reset move count
     updateMoveCount(0);
@@ -205,10 +244,13 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 
     document.getElementById('solutionDisplay').style.display = 'none';
     document.getElementById('solutionDisplay').innerHTML = '';
+    document.getElementById('knowledgeBox').style.display = 'none';
+    document.getElementById('knowledgeBox').innerHTML = '';
 
     // Optional: Reset dropdowns to default
     document.getElementById('solverSelect').selectedIndex = 0;
     document.getElementById('modelSelect').selectedIndex = 0;
+    input.dispatchEvent(new Event('input'));
 });
 function showKnowledge(solver, model, moveCount) {
     const box = document.getElementById('knowledgeBox');
@@ -234,8 +276,9 @@ function showKnowledge(solver, model, moveCount) {
       <strong>Solver Insight:</strong><br>${solverInfo[solver] || ''}<br><br>
       <strong>Model Insight:</strong><br>${modelInfo[model] || ''}<br><br>
       <strong>Trivia:</strong><br>${trivia}
-        `.trim();
+    `.trim();
 
-
-    typeWriterHTML(box, fullText, 20); // Speed: 20ms per character
+    // ✅ No typewriter — render instantly
+    box.innerHTML = fullText;
 }
+

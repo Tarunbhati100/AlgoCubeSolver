@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>AlgoCube Solver</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.cubing.net/v0/js/cubing/twisty" type="module"></script>
 </head>
 <body>
 <h1>AlgoCube Solver</h1>
@@ -40,7 +41,28 @@
     </select>
 </div>
 
-<div id="moveCount" class="move-counter">Moves used: 0 / 11</div>
+<div id="moveCount" class="move-counter">Moves used: 0 / 12</div>
+<div id="cubeContainer" style="display: flex; gap: 2rem; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
+    <!-- 3D Interactive Cube -->
+    <twisty-player
+            id="cubePlayer"
+            puzzle="3x3x3"
+            background="none"
+            camera-position="top-front"
+            control-panel="none"
+            style="width: 300px; height: 300px;">
+    </twisty-player>
+
+    <!-- 2D Slice Viewer -->
+    <twisty-player
+            id="sliceViewer"
+            control-panel="none"
+            background="none"
+            visualization="2D"
+            style="width: 300px; height: 300px;">
+    </twisty-player>
+</div>
+
 <div id="loader" class="loader" style="display: none;">⏳ Solving cube...</div>
 
 <!-- SOLUTION SUMMARY -->
@@ -49,7 +71,6 @@
 <!-- TYPEWRITER OUTPUT -->
 <div id="solutionDisplay" class="solution-box"></div>
 <div id="knowledgeBox" class="knowledge-box" style="display: none;"></div>
-
 <script src="script.js"></script>
 </body>
 </html>
