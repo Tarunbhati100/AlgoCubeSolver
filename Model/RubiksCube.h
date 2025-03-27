@@ -68,6 +68,8 @@ public:
     /*
      * Returns the move in the string format.
      */
+    static MOVE parseMove(const string& moveStr);
+
     static string getMove(MOVE ind);
 
     /*
@@ -114,6 +116,7 @@ public:
      */
     void print() const;
 
+    static void exportSolutionToJSON(const std::vector<RubiksCube::MOVE>& moves);
     /*
      * Randomly shuffle the cube with 'times' moves and returns the moves performed.
      */

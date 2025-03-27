@@ -31,6 +31,7 @@ public:
             moves = dfsSolver.solve();
             if (dfsSolver.rubiksCube.isSolved()) {
                 rubiksCube = dfsSolver.rubiksCube;
+                RubiksCube::exportSolutionToJSON(moves);
                 break;
             }
         }

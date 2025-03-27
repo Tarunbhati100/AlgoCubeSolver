@@ -25,6 +25,36 @@ char RubiksCube::getColorLetter(COLOR color) {
     }
 }
 
+RubiksCube::MOVE RubiksCube::parseMove(const std::string& moveStr) {
+    using M = RubiksCube::MOVE;
+
+    if (moveStr == "L") return M::L;
+    if (moveStr == "L'") return M::LPRIME;
+    if (moveStr == "L2") return M::L2;
+
+    if (moveStr == "R") return M::R;
+    if (moveStr == "R'") return M::RPRIME;
+    if (moveStr == "R2") return M::R2;
+
+    if (moveStr == "U") return M::U;
+    if (moveStr == "U'") return M::UPRIME;
+    if (moveStr == "U2") return M::U2;
+
+    if (moveStr == "D") return M::D;
+    if (moveStr == "D'") return M::DPRIME;
+    if (moveStr == "D2") return M::D2;
+
+    if (moveStr == "F") return M::F;
+    if (moveStr == "F'") return M::FPRIME;
+    if (moveStr == "F2") return M::F2;
+
+    if (moveStr == "B") return M::B;
+    if (moveStr == "B'") return M::BPRIME;
+    if (moveStr == "B2") return M::B2;
+
+    throw std::invalid_argument("Invalid move string: " + moveStr);
+}
+
 /*
  * Describe a move using an index
  */
@@ -68,7 +98,16 @@ string RubiksCube::getMove(MOVE ind) {
             return "B2";
     }
 }
-
+void RubiksCube::exportSolutionToJSON(const std::vector<RubiksCube::MOVE>& moves) {
+    std::ofstream out("solution.json");
+    out << "[";
+    for (size_t i = 0; i < moves.size(); ++i) {
+        out << "\"" << RubiksCube::getMove(moves[i]) << "\"";
+        if (i < moves.size() - 1) out << ", ";
+    }
+    out << "]";
+    out.close();
+}
 /*
  * Perform a move operation on using a Move index.
  */

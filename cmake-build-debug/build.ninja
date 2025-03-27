@@ -51,70 +51,70 @@ build cmake_object_order_depends_target_AlgoCubeSolver: phony || .
 
 build CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube.cpp.o: CXX_COMPILER__AlgoCubeSolver_unscanned_Debug /Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model/RubiksCube.cpp || cmake_object_order_depends_target_AlgoCubeSolver
   DEP_FILE = CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   OBJECT_FILE_DIR = CMakeFiles/AlgoCubeSolver.dir/Model
 
 build CMakeFiles/AlgoCubeSolver.dir/main.cpp.o: CXX_COMPILER__AlgoCubeSolver_unscanned_Debug /Users/tarunbhati/CLionProjects/AlgoCubeSolver/main.cpp || cmake_object_order_depends_target_AlgoCubeSolver
   DEP_FILE = CMakeFiles/AlgoCubeSolver.dir/main.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   OBJECT_FILE_DIR = CMakeFiles/AlgoCubeSolver.dir
 
 build CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube3dArray.cpp.o: CXX_COMPILER__AlgoCubeSolver_unscanned_Debug /Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model/RubiksCube3dArray.cpp || cmake_object_order_depends_target_AlgoCubeSolver
   DEP_FILE = CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube3dArray.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   OBJECT_FILE_DIR = CMakeFiles/AlgoCubeSolver.dir/Model
 
 build CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube1dArray.cpp.o: CXX_COMPILER__AlgoCubeSolver_unscanned_Debug /Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model/RubiksCube1dArray.cpp || cmake_object_order_depends_target_AlgoCubeSolver
   DEP_FILE = CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube1dArray.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   OBJECT_FILE_DIR = CMakeFiles/AlgoCubeSolver.dir/Model
 
 build CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCubeBitboard.cpp.o: CXX_COMPILER__AlgoCubeSolver_unscanned_Debug /Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model/RubiksCubeBitboard.cpp || cmake_object_order_depends_target_AlgoCubeSolver
   DEP_FILE = CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCubeBitboard.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   OBJECT_FILE_DIR = CMakeFiles/AlgoCubeSolver.dir/Model
 
 build CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/NibbleArray.cpp.o: CXX_COMPILER__AlgoCubeSolver_unscanned_Debug /Users/tarunbhati/CLionProjects/AlgoCubeSolver/PatternDatabases/NibbleArray.cpp || cmake_object_order_depends_target_AlgoCubeSolver
   DEP_FILE = CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/NibbleArray.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   OBJECT_FILE_DIR = CMakeFiles/AlgoCubeSolver.dir/PatternDatabases
 
 build CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/PatternDatabase.cpp.o: CXX_COMPILER__AlgoCubeSolver_unscanned_Debug /Users/tarunbhati/CLionProjects/AlgoCubeSolver/PatternDatabases/PatternDatabase.cpp || cmake_object_order_depends_target_AlgoCubeSolver
   DEP_FILE = CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/PatternDatabase.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   OBJECT_FILE_DIR = CMakeFiles/AlgoCubeSolver.dir/PatternDatabases
 
 build CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/CornerPatternDatabase.cpp.o: CXX_COMPILER__AlgoCubeSolver_unscanned_Debug /Users/tarunbhati/CLionProjects/AlgoCubeSolver/PatternDatabases/CornerPatternDatabase.cpp || cmake_object_order_depends_target_AlgoCubeSolver
   DEP_FILE = CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/CornerPatternDatabase.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   OBJECT_FILE_DIR = CMakeFiles/AlgoCubeSolver.dir/PatternDatabases
 
 build CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/CornerDBMaker.cpp.o: CXX_COMPILER__AlgoCubeSolver_unscanned_Debug /Users/tarunbhati/CLionProjects/AlgoCubeSolver/PatternDatabases/CornerDBMaker.cpp || cmake_object_order_depends_target_AlgoCubeSolver
   DEP_FILE = CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/CornerDBMaker.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   OBJECT_FILE_DIR = CMakeFiles/AlgoCubeSolver.dir/PatternDatabases
 
 build CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/math.cpp.o: CXX_COMPILER__AlgoCubeSolver_unscanned_Debug /Users/tarunbhati/CLionProjects/AlgoCubeSolver/PatternDatabases/math.cpp || cmake_object_order_depends_target_AlgoCubeSolver
   DEP_FILE = CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/math.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/tarunbhati/CLionProjects/AlgoCubeSolver/Model
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   OBJECT_FILE_DIR = CMakeFiles/AlgoCubeSolver.dir/PatternDatabases
@@ -128,7 +128,7 @@ build CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/math.cpp.o: CXX_COMPILER__A
 # Link the executable AlgoCubeSolver
 
 build AlgoCubeSolver: CXX_EXECUTABLE_LINKER__AlgoCubeSolver_Debug CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube.cpp.o CMakeFiles/AlgoCubeSolver.dir/main.cpp.o CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube3dArray.cpp.o CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube1dArray.cpp.o CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCubeBitboard.cpp.o CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/NibbleArray.cpp.o CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/PatternDatabase.cpp.o CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/CornerPatternDatabase.cpp.o CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/CornerDBMaker.cpp.o CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/math.cpp.o
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk
   OBJECT_DIR = CMakeFiles/AlgoCubeSolver.dir
   POST_BUILD = :
   PRE_LINK = :

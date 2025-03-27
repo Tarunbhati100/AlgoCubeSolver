@@ -3,8 +3,8 @@
 //
 
 #include <bits/stdc++.h>
-//#include "Model/RubiksCube3dArray.cpp"
-//#include "Model/RubiksCube1dArray.cpp"
+#include "Model/RubiksCube3dArray.cpp"
+#include "Model/RubiksCube1dArray.cpp"
 //#include "Model/RubiksCubeBitboard.cpp"
 #include "Solver/DFSSolver.h"
 #include "Solver/BFSSolver.h"
@@ -15,7 +15,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char* argv[]) {
 //    RubiksCube3dArray object3DArray;
 //    RubiksCube1dArray object1dArray;
 //    RubiksCubeBitboard objectBitboard;
@@ -264,26 +264,72 @@ int main() {
 //    cout << (int)cornerDB.getNumMoves(cube) << "\n";
 
 
-// CornerDBMaker Testing --------------------------------------------------------------------------
-    string fileName = "C:\\Users\\user\\CLionProjects\\AlgoCubeSolver\\Databases\\cornerDepth5V1.txt";
+    if (argc < 4) {
+        cerr << "Usage: " << argv[0] << " \"<scramble>\" <solver> <model>\n";
+        return 1;
+    }
 
-//    Code to create Corner Database
-//    CornerDBMaker dbMaker(fileName, 0x99);
-//    dbMaker.bfsAndStore();
+    string scramble = argv[1];
+    string solver = argv[2];
+    string model = argv[3];
 
-    RubiksCubeBitboard cube;
-    auto shuffleMoves = cube.randomShuffleCube(13);
-    cube.print();
-    for (auto move : shuffleMoves) cout << cube.getMove(move) << " ";
-    cout << "\n";
+    RubiksCube* cube = nullptr;
+    string heuristicFile = "Databases/cornerDepth5V1.txt";
 
-    IDAstarSolver<RubiksCubeBitboard, HashBitboard> idaStarSolver(cube,fileName);
-    auto moves = idaStarSolver.solve();
+    // Instantiate model
+    if (model == "bitboard") cube = new RubiksCubeBitboard();
+    else if (model == "array1d") cube = new RubiksCube1dArray();
+    else if (model == "array3d") cube = new RubiksCube3dArray();
+    else {
+        cerr << "Invalid model: " << model << "\n";
+        return 1;
+    }
 
-    idaStarSolver.rubiksCube.print();
-    for (auto move : moves) cout << cube.getMove(move) << " ";
-    cout << "\n";
+    // Parse scramble
+    istringstream iss(scramble);
+    string moveStr;
+    while (iss >> moveStr) {
+        try {
+            cube->move(cube->parseMove(moveStr));
+        } catch (const exception& e) {
+            cerr << "Error parsing move: " << e.what() << "\n";
+            return 1;
+        }
+    }
 
-
+    // Solve
+    vector<RubiksCube::MOVE> solution;
+    if (solver == "ida") {
+        if (model == "bitboard")
+            solution = IDAstarSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube), heuristicFile).solve();
+        else if (model == "array1d")
+            solution = IDAstarSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube), heuristicFile).solve();
+        else
+            solution = IDAstarSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube), heuristicFile).solve();
+    } else if (solver == "dfs") {
+        if (model == "bitboard")
+            solution = DFSSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube), 13).solve();
+        else if (model == "array1d")
+            solution = DFSSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube), 13).solve();
+        else
+            solution = DFSSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube), 13).solve();
+    } else if (solver == "bfs") {
+        if (model == "bitboard")
+            solution = BFSSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube)).solve();
+        else if (model == "array1d")
+            solution = BFSSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube)).solve();
+        else
+            solution = BFSSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube)).solve();
+    } else if (solver == "iddfs") {
+        if (model == "bitboard")
+            solution = IDDFSSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube), 13).solve();
+        else if (model == "array1d")
+            solution = IDDFSSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube), 13).solve();
+        else
+            solution = IDDFSSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube), 13).solve();
+    } else {
+        cerr << "Invalid solver: " << solver << "\n";
+        return 1;
+    }
     return 0;
 }
