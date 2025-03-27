@@ -1,16 +1,14 @@
 # ninja log v6
-1233	1329	1743033572586482083	AlgoCubeSolver	e70a491ecf6a57d
+517	615	1743034236353396046	AlgoCubeSolver	e70a491ecf6a57d
 719	1169	1743033572072210861	CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/PatternDatabase.cpp.o	dd570223175a73cd
 5	721	1743033571358905249	CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube.cpp.o	e3cf78410f061dbe
 721	1211	1743033572074158488	CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/CornerPatternDatabase.cpp.o	20b93b952c71507
-2	61	1743034010801566224	build.ninja	5c0e4f9858a27b02
+2	61	1743059004491335056	build.ninja	5c0e4f9858a27b02
 2	14	1743033559509352842	clean	ad90e366ad70d77b
 723	1233	1743033572076067657	CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/CornerDBMaker.cpp.o	7d51d651c6fdd649
-6	941	1743033571359201125	CMakeFiles/AlgoCubeSolver.dir/main.cpp.o	23a7ee51d24f0e64
+3	517	1743034235838777436	CMakeFiles/AlgoCubeSolver.dir/main.cpp.o	23a7ee51d24f0e64
 7	780	1743033571360537793	CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCubeBitboard.cpp.o	c15a90592f4ec2f8
 8	733	1743033571361225376	CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/NibbleArray.cpp.o	310aa15b446b4a78
 7	722	1743033571360053459	CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube1dArray.cpp.o	b9a5c281f1e0ffd9
 733	755	1743033572086888541	CMakeFiles/AlgoCubeSolver.dir/PatternDatabases/math.cpp.o	a9f116bc045e3d4f
 6	718	1743033571359599333	CMakeFiles/AlgoCubeSolver.dir/Model/RubiksCube3dArray.cpp.o	26ddd110f2d28f5f
-3	517	1743034235838777436	CMakeFiles/AlgoCubeSolver.dir/main.cpp.o	23a7ee51d24f0e64
-517	615	1743034236353396046	AlgoCubeSolver	e70a491ecf6a57d
