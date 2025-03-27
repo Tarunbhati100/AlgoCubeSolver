@@ -28,7 +28,9 @@ app.post('/solve', (req, res) => {
         const timeInMs = (diff[0] * 1e3 + diff[1] / 1e6).toFixed(2); // e.g. "32.45"
 
         if (error) {
-            console.error('Solver error:', stderr);
+            console.error('Solver error (execFile error):', error);
+            console.error('STDERR:', stderr);
+            console.error('STDOUT:', stdout);
             return res.status(500).json({ error: 'Solver failed' });
         }
 
