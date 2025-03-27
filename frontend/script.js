@@ -161,13 +161,14 @@ function showSummary(moves, solver, model, timeMs) {
     };
 
     const summaryText = `
-        Summary:
-        Total Moves: ${moves.length}
-        Solver: ${solverMap[solver] || solver}
-        Model: ${modelMap[model] || model}
-        Execution Time: ${timeMs} ms
+        <strong>Summary:</strong><br>
+        Total Moves: ${moves.length}<br>
+        Solver: ${solverMap[solver] || solver}<br>
+        Model: ${modelMap[model] || model}<br>
+        Execution Time: ${timeMs} ms<br>
         Time: ${new Date().toLocaleTimeString()}
         `.trim();
+
 
     typeWriterHTML(summary, summaryText, 25);
 }
