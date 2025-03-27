@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rubik’s Cube Solver</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Rubik’s Cube Solver</h1>
+
+<!-- MOVE BUTTONS -->
+<div class="move-buttons" id="moveButtons"></div>
+
+<!-- Scramble input (auto-filled by buttons) -->
+<div class="ui">
+    <input type="text" id="scramble" placeholder="Enter scramble or use buttons" />
+    <button id="solveBtn">Solve Cube</button>
+    <button id="resetBtn">Reset</button>
+</div>
+<div class="selectors">
+    <label for="solverSelect">Solver:</label>
+    <select id="solverSelect">
+        <option value="ida">IDA*</option>
+        <option value="bfs">BFS</option>
+        <option value="dfs">DFS</option>
+        <option value="iddfs">IDDFS</option>
+    </select>
+
+    <label for="modelSelect">Model:</label>
+    <select id="modelSelect">
+        <option value="bitboard">Bitboard</option>
+        <option value="array1d">1D Array</option>
+        <option value="array3d">3D Array</option>
+    </select>
+</div>
+
+<div id="moveCount" class="move-counter">Moves used: 0 / 11</div>
+<div id="loader" class="loader" style="display: none;">⏳ Solving cube...</div>
+
+<!-- SOLUTION SUMMARY -->
+<div id="solutionSummary" class="solution-summary"></div>
+
+<!-- TYPEWRITER OUTPUT -->
+<div id="solutionDisplay" class="solution-box"></div>
+<div id="knowledgeBox" class="knowledge-box" style="display: none;"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
