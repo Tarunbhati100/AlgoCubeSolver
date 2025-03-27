@@ -217,7 +217,6 @@ document.getElementById('scramble').addEventListener('input', () => {
 // ✅ Validate
         const isValid = moveList.length === 0 || moveList.every(move => allMovesSet.has(move));
 
-        // console.log(cleaned);
         if (!isValid) return; // Don't animate invalid input
 
         animateSolutionOnCube(cleaned);
