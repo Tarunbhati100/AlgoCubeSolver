@@ -1,4 +1,4 @@
-FROM gcc:13
+FROM gcc:9
 
 # Add your source files into the image (if needed)
 WORKDIR /app
