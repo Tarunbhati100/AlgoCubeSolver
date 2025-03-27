@@ -90,7 +90,7 @@ document.getElementById('solveBtn').addEventListener('click', async () => {
             throw new Error("Invalid or missing moves from server");
         }
 
-        animateSolutionOnCube(moves.join(' '));
+        animateSolutionOnCube(scramble+moves.join(' '));
         typeSolution(moves);
         showSummary(moves, solver, model, timeMs);
         showKnowledge(solver, model, moves.length);
