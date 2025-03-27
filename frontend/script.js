@@ -73,6 +73,23 @@ document.getElementById('solveBtn').addEventListener('click', async () => {
         solveBtn.textContent = "Solve Cube";
     }
 });
+function typeWriterText(element, text, speed = 20, callback = null) {
+    element.style.display = 'block';
+    element.innerHTML = ''; // clear previous
+    let i = 0;
+
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        } else if (callback) {
+            callback();
+        }
+    }
+
+    type();
+}
 
 function typeSolution(moves) {
     const display = document.getElementById('solutionDisplay');
@@ -104,7 +121,6 @@ const modelMap = {
 
 function showSummary(moves, solver, model, timeMs) {
     const summary = document.getElementById('solutionSummary');
-    summary.style.display = 'block';
 
     const solverMap = {
         ida: "IDA*",
@@ -119,15 +135,18 @@ function showSummary(moves, solver, model, timeMs) {
         array3d: "3D Array"
     };
 
-    summary.innerHTML = `
-        <strong>Summary:</strong><br>
-        Total Moves: ${moves.length}<br>
-        Solver: ${solverMap[solver] || solver}<br>
-        Model: ${modelMap[model] || model}<br>
-        Execution Time: ${timeMs} ms<br>
+    const summaryText = `
+        Summary:
+        Total Moves: ${moves.length}
+        Solver: ${solverMap[solver] || solver}
+        Model: ${modelMap[model] || model}
+        Execution Time: ${timeMs} ms
         Time: ${new Date().toLocaleTimeString()}
-    `;
+        `.trim();
+
+    typeWriterText(summary, summaryText, 25);
 }
+
 
 
 document.getElementById('scramble').addEventListener('input', () => {
@@ -168,6 +187,7 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 function showKnowledge(solver, model, moveCount) {
     const box = document.getElementById('knowledgeBox');
     box.style.display = 'block';
+    box.innerHTML = ''; // Clear previous content
 
     const solverInfo = {
         ida: "IDA* (Iterative Deepening A*) uses heuristics to find optimal solutions efficiently. It’s memory efficient and guaranteed to find the shortest path.",
@@ -182,12 +202,18 @@ function showKnowledge(solver, model, moveCount) {
         array3d: "3D Array mimics the physical cube layout using a 3D matrix. It’s intuitive and easy to debug, but slower for complex searches."
     };
 
-    const trivia = "20 is the maximum number of moves required to solve any 3x3 cube optimally!"
+    const trivia = "💡 Fun Fact: 20 is the maximum number of moves required to solve any 3x3 cube optimally — this is called God's Number.";
 
+    const fullText = `
+            Solver Insight:
+            ${solverInfo[solver] || "No info available."}
+            
+            Model Insight:
+            ${modelInfo[model] || "No info available."}
+            
+            Trivia:
+            ${trivia}
+                `.trim();
 
-    box.innerHTML = `
-        <strong>Solver Insight:</strong><br>${solverInfo[solver] || ""}<br><br>
-        <strong>Model Insight:</strong><br>${modelInfo[model] || ""}<br><br>
-        <strong>Trivia:</strong><br>${trivia}
-    `;
+    typeWriterText(box, fullText, 20); // Speed: 20ms per character
 }
