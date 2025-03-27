@@ -73,23 +73,48 @@ document.getElementById('solveBtn').addEventListener('click', async () => {
         solveBtn.textContent = "Solve Cube";
     }
 });
-function typeWriterText(element, text, speed = 20, callback = null) {
+function typeWriterHTML(element, html, speed = 25, callback = null) {
     element.style.display = 'block';
-    element.innerHTML = ''; // clear previous
+    element.innerHTML = '';
+
+    // Split by characters *but preserve HTML tags*
     let i = 0;
+    let inTag = false;
+    let tagBuffer = '';
+    let output = '';
 
     function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        } else if (callback) {
-            callback();
+        if (i >= html.length) {
+            if (callback) callback();
+            return;
         }
+
+        const char = html[i];
+
+        if (char === '<') {
+            inTag = true;
+        }
+
+        if (inTag) {
+            tagBuffer += char;
+            if (char === '>') {
+                output += tagBuffer;
+                element.innerHTML = output;
+                tagBuffer = '';
+                inTag = false;
+            }
+        } else {
+            output += char;
+            element.innerHTML = output;
+        }
+
+        i++;
+        setTimeout(type, speed);
     }
 
     type();
 }
+
 
 function typeSolution(moves) {
     const display = document.getElementById('solutionDisplay');
@@ -144,7 +169,7 @@ function showSummary(moves, solver, model, timeMs) {
         Time: ${new Date().toLocaleTimeString()}
         `.trim();
 
-    typeWriterText(summary, summaryText, 25);
+    typeWriterHTML(box, knowledgeText, 25);
 }
 
 
@@ -205,15 +230,11 @@ function showKnowledge(solver, model, moveCount) {
     const trivia = "💡 Fun Fact: 20 is the maximum number of moves required to solve any 3x3 cube optimally — this is called God's Number.";
 
     const fullText = `
-            Solver Insight:
-            ${solverInfo[solver] || "No info available."}
-            
-            Model Insight:
-            ${modelInfo[model] || "No info available."}
-            
-            Trivia:
-            ${trivia}
-                `.trim();
+      <strong>Solver Insight:</strong><br>${solverInfo[solver] || ''}<br><br>
+      <strong>Model Insight:</strong><br>${modelInfo[model] || ''}<br><br>
+      <strong>Trivia:</strong><br>${trivia}
+        `.trim();
 
-    typeWriterText(box, fullText, 20); // Speed: 20ms per character
+
+    typeWriterHTML(box, fullText, 20); // Speed: 20ms per character
 }
