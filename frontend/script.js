@@ -169,7 +169,7 @@ function showSummary(moves, solver, model, timeMs) {
         Time: ${new Date().toLocaleTimeString()}
         `.trim();
 
-    typeWriterHTML(summary, knowledgeText, 25);
+    typeWriterHTML(summary, summaryText, 25);
 }
 
 
