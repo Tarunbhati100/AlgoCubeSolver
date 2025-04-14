@@ -14,7 +14,18 @@
         View source on GitHub →
     </a>
 </div>
-
+<button id="toggleGuideBtn" onclick="toggleGuide()">❓ How to Use</button>
+<div id="userGuide">
+    <h2>🧠 How to Use the Cube Solver</h2>
+    <ol style="line-height: 1.6;">
+        <li><strong>Scramble the Cube:</strong> Click on the move buttons (e.g., <code>R</code>, <code>L'</code>, <code>U2</code>) to apply moves to a virtual cube. These simulate a real-world scramble.</li>
+        <li><strong>Track Your Moves:</strong> Each move you select gets added to the scramble input box. You can also type moves directly like <code>R U R' U'(" " seperated)</code>.</li>
+        <li><strong>Select Solver Algorithm:</strong> Choose from various solving algorithms like <code>BFS</code>, <code>DFS</code>, <code>IDA*</code> from the dropdown menu.</li>
+        <li><strong>Click “Solve”:</strong> The solver will calculate the optimal or near-optimal solution for your scramble and display the solving moves.</li>
+        <li><strong>Visualize:</strong> Watch each move applied to the cube in the cube-visualization, and follow the steps to solve your real-life cube!</li>
+        <li><strong>Reset Anytime:</strong> Click “Reset” to clear the scramble and start fresh.</li>
+    </ol>
+</div>
 <!-- MOVE BUTTONS -->
 <div class="move-buttons" id="moveButtons"></div>
 

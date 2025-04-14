@@ -2,8 +2,16 @@ const allMoves = [
     "L", "L'", "L2", "R", "R'", "R2", "U", "U'", "U2",
     "D", "D'", "D2", "F", "F'", "F2", "B", "B'", "B2"
 ];
+const moveLabelMap = {
+    "L":  "Left", "L'": "Left-Prime", "L2": "Left-Twice", "R":  "Right", "R'": "Right-Prime", "R2": "Right-Twice", "U":  "Up",
+    "U'": "Up-Prime", "U2": "Up-Twice", "D":  "Down", "D'": "Down-Prime", "D2": "Down-Twice", "F":  "Front", "F'": "Front-Prime",
+    "F2": "Front-Twice", "B":  "Back", "B'": "Back-Prime", "B2": "Back-Twice"
+};
 const allMovesSet = new Set(allMoves);
-
+function toggleGuide() {
+    const guide = document.getElementById("userGuide");
+    guide.style.display = (guide.style.display === "none") ? "block" : "none";
+}
 function animateSolutionOnCube(moves) {
     const cube = document.getElementById('cubePlayer');
     const slicecube = document.getElementById('sliceViewer');
@@ -27,8 +35,29 @@ function animateSolutionOnCube(moves) {
 const moveButtonsContainer = document.getElementById('moveButtons');
 allMoves.forEach(move => {
     const btn = document.createElement('button');
+    const img = document.createElement('img');
+
+    btn.style.display = 'flex';
+    btn.style.flexDirection = 'column';
+    // btn.style.alignItems = 'center';
+    // btn.style.margin = '5px';
+    // btn.style.padding = '5px';
+    // btn.style.cursor = 'pointer';
+
+    img.src = `moves_img/${move}.png`;  // e.g., moves_img/R.png
+    img.alt = move;
+    img.style.width = '60px';  // adjust size as needed
+    img.style.height = '60px';
+    img.style.marginRight = '5px';
     btn.textContent = move;
+
+    const label = document.createElement('span');
+    label.textContent = moveLabelMap[move];
+
     btn.onclick = () => addMoveToInput(move);
+
+    btn.appendChild(img);
+    btn.appendChild(label);
     moveButtonsContainer.appendChild(btn);
 });
 
