@@ -64,6 +64,7 @@ public:
         }
         rubiksCube = solved_cube;
         reverse(moves.begin(), moves.end());
+        RubiksCube::exportSolutionToJSON(moves);
         return moves;
     }
 };

@@ -42,6 +42,7 @@ public:
 
     vector<RubiksCube::MOVE> solve() {
         dfs(1);
+        RubiksCube::exportSolutionToJSON(moves);
         return moves;
     }
 
