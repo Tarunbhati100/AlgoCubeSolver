@@ -15,6 +15,68 @@
 
 using namespace std;
 
+const string heuristicFile = "Databases/cornerDepth5V1.txt";
+
+// Create cube model based on user input
+RubiksCube* createCubeModel(const string& model) {
+    if (model == "bitboard") return new RubiksCubeBitboard();
+    if (model == "array1d")  return new RubiksCube1dArray();
+    if (model == "array3d")  return new RubiksCube3dArray();
+    throw invalid_argument("Invalid model type: " + model);
+}
+
+// Apply scramble string to cube
+void applyScramble(RubiksCube* cube, const string& scramble) {
+    istringstream iss(scramble);
+    string moveStr;
+    while (iss >> moveStr) {
+        try {
+            cube->move(cube->parseMove(moveStr));
+        } catch (const exception& e) {
+            throw runtime_error("Error parsing move '" + moveStr + "': " + e.what());
+        }
+    }
+}
+
+// Solve using the chosen method and model
+vector<RubiksCube::MOVE> solveCube(const string& solver, const string& model, RubiksCube* cube) {
+    if (solver == "ida") {
+        if (model == "bitboard")
+            return IDAstarSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube), heuristicFile).solve();
+        if (model == "array1d")
+            return IDAstarSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube), heuristicFile).solve();
+        return IDAstarSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube), heuristicFile).solve();
+    }
+
+    if (solver == "dfs") {
+        const int depthLimit = 13;
+        if (model == "bitboard")
+            return DFSSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube), depthLimit).solve();
+        if (model == "array1d")
+            return DFSSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube), depthLimit).solve();
+        return DFSSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube), depthLimit).solve();
+    }
+
+    if (solver == "bfs") {
+        if (model == "bitboard")
+            return BFSSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube)).solve();
+        if (model == "array1d")
+            return BFSSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube)).solve();
+        return BFSSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube)).solve();
+    }
+
+    if (solver == "iddfs") {
+        const int depthLimit = 13;
+        if (model == "bitboard")
+            return IDDFSSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube), depthLimit).solve();
+        if (model == "array1d")
+            return IDDFSSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube), depthLimit).solve();
+        return IDDFSSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube), depthLimit).solve();
+    }
+
+    throw invalid_argument("Invalid solver type: " + solver);
+}
+
 int main(int argc, char* argv[]) {
 //    RubiksCube3dArray object3DArray;
 //    RubiksCube1dArray object1dArray;
@@ -273,63 +335,12 @@ int main(int argc, char* argv[]) {
     string solver = argv[2];
     string model = argv[3];
 
-    RubiksCube* cube = nullptr;
-    string heuristicFile = "Databases/cornerDepth5V1.txt";
-
-    // Instantiate model
-    if (model == "bitboard") cube = new RubiksCubeBitboard();
-    else if (model == "array1d") cube = new RubiksCube1dArray();
-    else if (model == "array3d") cube = new RubiksCube3dArray();
-    else {
-        cerr << "Invalid model: " << model << "\n";
-        return 1;
-    }
+    RubiksCube* cube = createCubeModel(model);
 
     // Parse scramble
-    istringstream iss(scramble);
-    string moveStr;
-    while (iss >> moveStr) {
-        try {
-            cube->move(cube->parseMove(moveStr));
-        } catch (const exception& e) {
-            cerr << "Error parsing move: " << e.what() << "\n";
-            return 1;
-        }
-    }
+    applyScramble(cube,scramble);
 
     // Solve
-    vector<RubiksCube::MOVE> solution;
-    if (solver == "ida") {
-        if (model == "bitboard")
-            solution = IDAstarSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube), heuristicFile).solve();
-        else if (model == "array1d")
-            solution = IDAstarSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube), heuristicFile).solve();
-        else
-            solution = IDAstarSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube), heuristicFile).solve();
-    } else if (solver == "dfs") {
-        if (model == "bitboard")
-            solution = DFSSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube), 13).solve();
-        else if (model == "array1d")
-            solution = DFSSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube), 13).solve();
-        else
-            solution = DFSSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube), 13).solve();
-    } else if (solver == "bfs") {
-        if (model == "bitboard")
-            solution = BFSSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube)).solve();
-        else if (model == "array1d")
-            solution = BFSSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube)).solve();
-        else
-            solution = BFSSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube)).solve();
-    } else if (solver == "iddfs") {
-        if (model == "bitboard")
-            solution = IDDFSSolver<RubiksCubeBitboard, HashBitboard>(*dynamic_cast<RubiksCubeBitboard*>(cube), 13).solve();
-        else if (model == "array1d")
-            solution = IDDFSSolver<RubiksCube1dArray, Hash1d>(*dynamic_cast<RubiksCube1dArray*>(cube), 13).solve();
-        else
-            solution = IDDFSSolver<RubiksCube3dArray, Hash3d>(*dynamic_cast<RubiksCube3dArray*>(cube), 13).solve();
-    } else {
-        cerr << "Invalid solver: " << solver << "\n";
-        return 1;
-    }
+    solveCube(solver,model,cube);
     return 0;
 }
